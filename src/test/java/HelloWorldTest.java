@@ -27,13 +27,29 @@ public class HelloWorldTest {
     }
 
     @Test
-    public void testHomeTask4() {
+    public void testGetWithParams() {
         Response response = RestAssured
-                .get("https://playground.learnqa.ru/api/get_text")
+                .given()
+                .queryParam("param1", "value1")
+                .queryParam("param2", "value2")
+                .get("https://playground.learnqa.ru/api/check_type")
                 .andReturn();
-        response.prettyPrint();
+        response.print();
     }
 
+    @Test
+    public void testPostWithParams() {
+        Map<String, String> body = new HashMap<>();
+        body.put("param1", "value1");
+        body.put("param2", "value2");
+
+        Response response = RestAssured
+                .given()
+                .body(body)    //.body("param1=value1&param2=value2")
+                .post("https://playground.learnqa.ru/api/check_type")
+                .andReturn();
+        response.print();
+    }
     
 
 }
