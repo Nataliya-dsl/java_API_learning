@@ -35,6 +35,9 @@ public class HelloWorldTest {
                 .get("https://playground.learnqa.ru/api/check_type")
                 .andReturn();
         response.print();
+
+        int statusCode = response.getStatusCode();
+        System.out.println(statusCode);
     }
 
     @Test
@@ -50,6 +53,19 @@ public class HelloWorldTest {
                 .andReturn();
         response.print();
     }
-    
+    @Test
+    public void testCodeResponseIs303() {
+        Response response = RestAssured
+                .given()
+                .redirects()
+                .follow(true)
+                .when()
+                .get("https://playground.learnqa.ru/api/get_303")
+                .andReturn();
+
+        int statusCode = response.getStatusCode();
+        System.out.println(statusCode);
+    }
+
 
 }
