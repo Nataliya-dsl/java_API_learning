@@ -9,7 +9,20 @@ import java.util.Map;
 
 public class HomeTaskTests {
 
+    @Test
+    public void testHomeTask5() {
+        JsonPath response = RestAssured
+                .get("https://playground.learnqa.ru/api/get_json_homework")
+                .jsonPath();
+        response.prettyPrint();
 
+        String answer = response.get("messages[1].message");
+        if (answer == null) {
+            System.out.println("The key is absent");
+        } else {
+            System.out.println(answer);
+        }
+    }
 
     @Test
     public void testHomeTask6() {
